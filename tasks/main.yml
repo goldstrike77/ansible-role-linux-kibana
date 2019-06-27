@@ -1,0 +1,29 @@
+---
+- name: Include tasks for specific OS
+  include: '{{ ansible_os_family }}.yml'
+
+- name: Straight to getenforce selinux status
+  include: 'selinux.yml'
+
+- name: Include firewall tasks
+  include: 'firewall.yml'
+
+- name: Configuration the elasticsearch
+  include: 'configureation.yml'
+
+- name: Include plugins tasks
+  include: 'plugins.yml'
+  when: kibana_plugins is defined
+
+- name: Reload the Kibana service
+  shell: echo ''
+  notify: 'Ensure Kibana service is enabled'
+  when: kibana_config is changed or kibana_update is changed or kibana_plugin is changed
+
+- name: Force the handler to run immediately
+  meta: flush_handlers
+
+- include_tasks: 'register.yml'
+  when: 
+    - consul_public_register
+    - not kibana_auth

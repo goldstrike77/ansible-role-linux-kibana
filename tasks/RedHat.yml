@@ -1,0 +1,24 @@
+---
+- name: Include OS-specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: 'Add Kibana {{ kibana_version.split(".")[0] }} YUM repositories'
+  yum_repository:
+    name: '{{ kibana_repo_name }}'
+    description: '{{ kibana_repo_name }} YUM repository'
+    file: '{{ kibana_repo_name }}'
+    baseurl: '{{ kibana_repo_url }}'
+    gpgcheck: 'no'
+    timeout: '60'
+
+- name: Install the Kibana packages
+  yum:
+    name: '{{ item }}'
+    state: 'present'
+    enablerepo: '{{ kibana_repo_name }}'
+    validate_certs: 'no'
+    update_cache: 'yes'
+    disable_gpg_check: 'yes'
+  with_items:
+    - '{{ kibana_packages }}'
+  register: kibana_update

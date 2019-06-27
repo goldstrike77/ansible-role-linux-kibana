@@ -1,0 +1,54 @@
+---
+# General parameters #
+kibana_is_install: false # A boolean value, whether install the Kibana.
+kibana_version: '6.8.1' # Specify the Elasticsearch version.
+kibana_selinux: false # SELinux security policy.
+kibana_auth: false # A boolean value, Enable or Disable authentication.
+kibana_user: 'elastic' # Authorization user name, do not modify it.
+kibana_pass: 'changeme' # Authorization user password.
+
+# Role dependencies #
+kibana_elastic_dept: false # A boolean value, whether ElasticSearch use the same environment.
+kibana_ngx_dept: false # A boolean value, whether proxy web interface and API traffic using NGinx.
+
+# Service Mesh #
+environments: 'SIT' # Define the service environment.
+consul_public_register: false # Whether register a exporter service with public consul client.
+consul_public_exporter_token: '00000000-0000-0000-0000-000000000000' # Public Consul client ACL token.
+consul_public_http_port: '8500' # The consul HTTP API port.
+consul_public_clients: # List of public consul clients.
+  - '127.0.0.1'
+
+# Listen port #
+kibana_port_server: '5601' # Kibana server port.
+
+# Elasticsearch parameters #
+kibana_elastic_host: '127.0.0.1' # Elasticsearch instances.
+kibana_elastic_port: '9200' # Elasticsearch REST port.
+
+# NGinx parameters #
+kibana_ngx_block_agents: false # Enables or disables block unsafe User Agents.
+kibana_ngx_block_string: false # Enables or disables block includes Exploits / File injections / Spam / SQL injections.
+kibana_ngx_compress: false # Enables or disables compression.
+kibana_ngx_domain: 'navigate.example.com' # Defines domain name.
+kibana_ngx_pagespeed: false # Enables or disables pagespeed modules.
+kibana_ngx_port_http: '80' # NGinx HTTP listen port.
+kibana_ngx_port_https: '443' # NGinx HTTPs listen port.
+kibana_ngx_ssl_protocols: 'modern' # intermediate or modern, defines SSL protocol profile.
+kibana_ngx_version: 'extras' # extras or standard
+kibana_ngx_site_path: '/data/nginx_site' # Specify the NGinx site directory.
+kibana_ngx_logs_path: '/data/nginx_logs' # Specify the NGinx logs directory.
+
+# Elastic parameters #
+kibana_elastic_cluster: 'ossec' # Specify name for your Elastic cluster name.
+kibana_elastic_path: '/data' # Specify the ElasticSearch data directory.
+kibana_elastic_port_rest: '9200' # Elasticsearch REST port.
+kibana_elastic_node_type: 'default' # Type of nodes: default, master, data, ingest and coordinat.
+kibana_elastic_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.
+kibana_elastic_hosts: # List of Elasticsearch hosts.
+  - '{{ ansible_default_ipv4.address }}'
+
+# Plugins #
+kibana_plugins:
+  - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
+  - 'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'

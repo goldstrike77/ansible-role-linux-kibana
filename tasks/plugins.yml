@@ -1,0 +1,12 @@
+---
+- name: Install kibana plugins
+  shell: '/usr/share/kibana/bin/kibana-plugin install {{ item }}'
+  become: 'yes'
+  become_user: 'kibana'
+  register: kibana_plugin
+  until: kibana_plugin is succeeded
+  retries: 5
+  delay: 3
+  loop: '{{ kibana_plugins }}'
+  changed_when: false
+  failed_when: false

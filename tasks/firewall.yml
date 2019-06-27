@@ -1,0 +1,10 @@
+---
+- name: Allow Kibana service port
+  firewalld:
+    port: '{{ item }}/tcp'
+    zone: 'public'
+    permanent: 'true'
+    immediate: 'true'
+    state: 'enabled'
+  loop:
+    - '{{ kibana_port_server }}'
