@@ -1,38 +1,167 @@
-Role Name
-=========
+![](https://img.shields.io/badge/Ansible-kibana-green.svg?logo=angular&style=for-the-badge)
 
-A brief description of the role goes here.
+>__Please note that the original design goal of this role was more concerned with the initial installation and bootstrapping environment, which currently does not involve performing continuous maintenance, and therefore are only suitable for testing and development purposes,  should not be used in production environments.__
 
-Requirements
-------------
+>__请注意，此角色的最初设计目标更关注初始安装和引导环境，目前不涉及执行连续维护，因此仅适用于测试和开发目的，不应在生产环境中使用。__
+___
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+<p><img src="https://raw.githubusercontent.com/goldstrike77/goldstrike77.github.io/master/img/logo/logo_kibana.png" align="right" /></p>
 
-Role Variables
---------------
+__Table of Contents__
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- [Overview](#overview)
+- [Requirements](#requirements)
+  * [Operating systems](#operating-systems)
+  * [Kibana Versions](#kibana-versions)
+- [ Role variables](#Role-variables)
+  * [Main Configuration](#Main-parameters)
+  * [Other Configuration](#Other-parameters)
+- [Dependencies](#dependencies)
+- [Example Playbook](#example-playbook)
+  * [Hosts inventory file](#Hosts-inventory-file)
+  * [Vars in role configuration](#vars-in-role-configuration)
+  * [Combination of group vars and playbook](#combination-of-group-vars-and-playbook)
+- [License](#license)
+- [Author Information](#author-information)
+- [Contributors](#Contributors)
 
-Dependencies
-------------
+## Overview
+This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Requirements
+### Operating systems
+This role will work on the following operating systems:
 
-Example Playbook
-----------------
+  * CentOS 7
 
+### Kibana versions
+
+The following list of supported the kibana releases:
+
+  * Kibana 6.8+, 7.1+
+
+## Role variables
+### Main parameters #
+There are some variables in defaults/main.yml which can (Or needs to) be overridden:
+
+##### General parameters
+* `kibana_version`: Specify the Kibana version.
+* `kibana_selinux`: SELinux security policy.
+* `kibana_auth`: A boolean value, Enable or Disable authentication.
+* `kibana_user`: Authorization user name, do not modify it.
+* `kibana_pass`: Authorization user password.
+
+##### Role dependencies
+* `kibana_elastic_dept`: A boolean value, whether ElasticSearch use the same environment.
+* `kibana_ngx_dept`: A boolean value, whether proxy web interface and API traffic using NGinx.
+
+##### Service Mesh
+* `environments`: Define the service environment.
+* `consul_public_register`: Whether register a exporter service with public consul client.
+* `consul_public_exporter_token`: Public Consul client ACL token.
+* `consul_public_http_port`: The consul HTTP API port.
+* `consul_public_clients`: List of public consul clients.
+
+##### Listen port
+* `kibana_port_server`: Kibana server port.
+
+##### Elasticsearch parameters
+* `kibana_elastic_host`: Elasticsearch instances.
+* `kibana_elastic_port`: Elasticsearch REST port.
+
+##### NGinx parameters
+* `kibana_ngx_block_agents`: Enables or disables block unsafe User Agents.
+* `kibana_ngx_block_string`: Enables or disables block includes Exploits / File injections / Spam / SQL injections.
+* `kibana_ngx_compress`: Enables or disables compression.
+* `kibana_ngx_domain`: Defines domain name.
+* `kibana_ngx_pagespeed`: Enables or disables pagespeed modules.
+* `kibana_ngx_port_http`: NGinx HTTP listen port.
+* `kibana_ngx_port_https`: NGinx HTTPs listen port.
+* `kibana_ngx_ssl_protocols`: intermediate or modern, defines SSL protocol profile.
+* `kibana_ngx_version`: extras or standard
+* `kibana_ngx_site_path`: Specify the NGinx site directory.
+* `kibana_ngx_logs_path`: Specify the NGinx logs directory.
+
+##### Elastic parameters
+* `kibana_elastic_cluster`: Specify name for your Elastic cluster name.
+* `kibana_elastic_path`: Specify the ElasticSearch data directory.
+* `kibana_elastic_port_rest`: Elasticsearch REST port.
+* `kibana_elastic_node_type`: Type of nodes: default, master, data, ingest and coordinat.
+* `kibana_elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
+* `kibana_elastic_hosts`: List of Elasticsearch hosts.
+
+##### Plugins
+* `kibana_plugins`: Plug-in List
+
+### Other parameters
+There are some variables in vars/main.yml:
+
+## Dependencies
+- Ansible versions > 2.6 are supported.
+- [NGinx](https://github.com/goldstrike77/ansible-role-linux-nginx.git)
+- [Elasticsearch](https://github.com/goldstrike77/ansible-role-linux-elasticsearch.git)
+
+## Example
+
+### Hosts inventory file
+See tests/inventory for an example.
+
+    node01 ansible_host='192.168.1.10' kibana_version='7.1.1'
+
+### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: ansible-role-linux-kibana
+           kibana_version: '7.1.1'
 
-License
--------
+### Combination of group vars and playbook
+You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-BSD
+    kibana_version: '7.1.1'
+    kibana_selinux: false
+    kibana_auth: false
+    kibana_user: 'elastic'
+    kibana_pass: 'changeme'
+    kibana_elastic_dept: false
+    kibana_ngx_dept: false
+    kibana_port_server: '5601'
+    kibana_elastic_host: '127.0.0.1'
+    kibana_elastic_port: '9200'
+    kibana_ngx_block_agents: false
+    kibana_ngx_block_string: false
+    kibana_ngx_compress: false
+    kibana_ngx_domain: 'navigate.example.com'
+    kibana_ngx_pagespeed: false
+    kibana_ngx_port_http: '80'
+    kibana_ngx_port_https: '443'
+    kibana_ngx_ssl_protocols: 'modern'
+    kibana_ngx_version: 'extras'
+    kibana_ngx_site_path: '/data/nginx_site'
+    kibana_ngx_logs_path: '/data/nginx_logs'
+    kibana_elastic_cluster: 'ossec'
+    kibana_elastic_path: '/data'
+    kibana_elastic_port_rest: '9200'
+    kibana_elastic_node_type: 'default'
+    kibana_elastic_heap_size: '3g'
+    kibana_elastic_hosts:
+      - '{{ ansible_default_ipv4.address }}'
+    kibana_plugins:
+      - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
+      - 'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
+    environments: 'SIT'
+    consul_public_register: false
+    consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
+    consul_public_http_port: '8500'
+    consul_public_clients:
+      - '127.0.0.1'
 
-Author Information
-------------------
+## License
+![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## Author Information
+Please send your suggestions to make this role better.
+
+## Contributors
+Special thanks to the [Connext Information Technology](http://www.connext.com.cn) for their contributions to this role.
