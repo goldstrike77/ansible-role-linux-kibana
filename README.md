@@ -91,7 +91,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `kibana_elastic_hosts`: List of Elasticsearch hosts.
 
 ##### Plugins
-* `kibana_plugins`: Plug-in List
+* `kibana_plugins`: Plug-in List.
 
 ### Other parameters
 There are some variables in vars/main.yml:

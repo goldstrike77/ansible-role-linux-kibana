@@ -49,6 +49,6 @@ kibana_elastic_hosts: # List of Elasticsearch hosts.
   - '{{ ansible_default_ipv4.address }}'
 
 # Plugins #
-kibana_plugins: # Plug-in List.
-  - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
-  - 'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
+#kibana_plugins: # Plug-in List.
+#  - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
+#  - 'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
