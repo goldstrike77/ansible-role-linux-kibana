@@ -23,7 +23,7 @@
 - name: Force the handler to run immediately
   meta: flush_handlers
 
-- include_tasks: 'register.yml'
+- include_tasks: 'register.yml' # Not available in basic authentication mode.
   when: 
     - consul_public_register
     - not kibana_auth

@@ -27,6 +27,7 @@ __Table of Contents__
 
 ## Overview
 This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.
+Prometheus exporter plugin is visible on basic authentication mode.
 
 ## Requirements
 ### Operating systems
