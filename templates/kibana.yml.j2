@@ -44,6 +44,7 @@ elasticsearch.hosts: ["http://{{ kibana_elastic_host | default('localhost') }}:{
 # index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
 # is proxied through the Kibana server.
 {% if kibana_auth %}
+xpack.security.enabled: true
 elasticsearch.username: "{{ kibana_user | default('elastic') }}"
 elasticsearch.password: "{{ kibana_pass | default('changeme') }}"
 {% else %}
