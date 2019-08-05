@@ -35,7 +35,9 @@
 - name: Force the handler to run immediately
   meta: flush_handlers
 
-- include_tasks: 'register.yml' # Not available in basic authentication mode.
-  when: 
+- name: Registered with HashiCorp Consul # Not available in basic authentication mode.
+  include: 'register.yml'
+  when:
+    - exporter_is_install
     - consul_public_register
     - not kibana_auth

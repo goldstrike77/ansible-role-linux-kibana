@@ -19,6 +19,8 @@
     validate_certs: 'no'
     update_cache: 'yes'
     disable_gpg_check: 'yes'
-  with_items:
-    - '{{ kibana_packages }}'
+  loop: '{{ kibana_packages|flatten(levels=1) }}'
   register: kibana_update
+  until: kibana_update is succeeded
+  retries: 3
+  delay: 5

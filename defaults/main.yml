@@ -13,6 +13,7 @@ kibana_ngx_dept: false # A boolean value, whether proxy web interface and API tr
 
 # Service Mesh #
 environments: 'SIT' # Define the service environment.
+exporter_is_install: false # Whether to install prometheus exporter.
 consul_public_register: false # Whether register a exporter service with public consul client.
 consul_public_exporter_token: '00000000-0000-0000-0000-000000000000' # Public Consul client ACL token.
 consul_public_http_port: '8500' # The consul HTTP API port.
@@ -44,7 +45,7 @@ kibana_elastic_cluster: 'ossec' # Specify name for your Elastic cluster name.
 kibana_elastic_path: '/data' # Specify the ElasticSearch data directory.
 kibana_elastic_port_rest: '9200' # Elasticsearch REST port.
 kibana_elastic_node_type: 'default' # Type of nodes: default, master, data, ingest and coordinat.
-kibana_elastic_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.
+kibana_elastic_heap_size: '2g' # Specify the maximum memory allocation pool for a Java virtual machine.
 kibana_elastic_hosts: # List of Elasticsearch hosts.
   - '{{ ansible_default_ipv4.address }}'
 
