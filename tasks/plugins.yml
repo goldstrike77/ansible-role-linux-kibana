@@ -1,6 +1,6 @@
 ---
 - name: Install kibana plugins
-  shell: '/usr/share/kibana/bin/kibana-plugin install {{ item }}'
+  shell: '/usr/share/kibana/bin/kibana-plugin install -q -s {{ item }}'
   become: 'yes'
   become_user: 'kibana'
   register: kibana_plugin
