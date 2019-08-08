@@ -105,7 +105,7 @@ dependencies:
       elastic_pass: '{{ kibana_pass }}'
       elastic_path: '{{ kibana_elastic_path }}'
       elastic_port_rest: '{{ kibana_elastic_port_rest }}'
-      elastic_servers: '{{ kibana_elastic_hosts }}'
+      elastic_servers: '{% if elastic_node_type == "coordinat" %}{{ kibana_elastic_hosts }}{% else %}{{ kibana_servers }}{% endif %}'
       elastic_version: '{{ kibana_version }}'
       elastic_heap_size: '{{ kibana_elastic_heap_size }}'
       elastic_node_type: '{{ kibana_elastic_node_type }}'
