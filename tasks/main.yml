@@ -38,6 +38,6 @@
 - name: Registered with HashiCorp Consul # Not available in basic authentication mode.
   include: 'register.yml'
   when:
-    - exporter_is_install
-    - consul_public_register
-    - not kibana_auth
+    - exporter_is_install | bool
+    - consul_public_register | bool
+    - not kibana_auth | bool

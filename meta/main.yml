@@ -97,7 +97,7 @@ dependencies:
           backend_port: '{{ kibana_port_server }}'
           sticky: 'ip_hash'
           keepalive: '32'
-    when: kibana_ngx_dept
+    when: kibana_ngx_dept | bool
   - role: 'ansible-role-linux-elasticsearch'
     vars:
       elastic_auth: '{{ kibana_auth | bool | to_json }}'
@@ -109,4 +109,4 @@ dependencies:
       elastic_version: '{{ kibana_version }}'
       elastic_heap_size: '{{ kibana_elastic_heap_size }}'
       elastic_node_type: '{{ kibana_elastic_node_type }}'
-    when: kibana_elastic_dept
+    when: kibana_elastic_dept | bool
