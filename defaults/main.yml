@@ -12,6 +12,8 @@ kibana_elastic_dept: false # A boolean value, whether ElasticSearch use the same
 kibana_ngx_dept: false # A boolean value, whether proxy web interface and API traffic using NGinx.
 
 # Service Mesh #
+subscription: 'default' # Define the service subscription.
+region: 'default' # Define the service region.
 environments: 'SIT' # Define the service environment.
 exporter_is_install: false # Whether to install prometheus exporter.
 consul_public_register: false # Whether register a exporter service with public consul client.

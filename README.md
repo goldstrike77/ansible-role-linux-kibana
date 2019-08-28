@@ -58,6 +58,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `kibana_ngx_dept`: A boolean value, whether proxy web interface and API traffic using NGinx.
 
 ##### Service Mesh
+* `subscription`: Define the service subscription.
+* `region`: Define the service region.
 * `environments`: Define the service environment.
 * `exporter_is_install`: Whether to install prometheus exporter.
 * `consul_public_register`: Whether register a exporter service with public consul client.
@@ -153,6 +155,8 @@ You can also use the group_vars or the host_vars files for setting the variables
     kibana_plugins:
       - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
       - 'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
+    subscription: 'default'
+    region: 'default'
     environments: 'SIT'
     exporter_is_install: false
     consul_public_register: false
