@@ -13,13 +13,12 @@
 
 - name: Install the Kibana packages
   yum:
-    name: '{{ item }}'
+    name: '{{ kibana_packages }}'
     state: 'present'
     enablerepo: '{{ kibana_repo_name }}'
     validate_certs: 'no'
     update_cache: 'yes'
     disable_gpg_check: 'yes'
-  loop: '{{ kibana_packages|flatten(levels=1) }}'
   register: kibana_update
   until: kibana_update is succeeded
   retries: 3

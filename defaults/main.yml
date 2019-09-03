@@ -30,11 +30,11 @@ kibana_elastic_host: '127.0.0.1' # Elasticsearch instances.
 kibana_elastic_port: '9200' # Elasticsearch REST port.
 
 # NGinx parameters #
-kibana_ngx_block_agents: false # Enables or disables block unsafe User Agents.
-kibana_ngx_block_string: false # Enables or disables block includes Exploits / File injections / Spam / SQL injections.
-kibana_ngx_compress: false # Enables or disables compression.
+kibana_ngx_block_agents: true # Enables or disables block unsafe User Agents.
+kibana_ngx_block_string: true # Enables or disables block includes Exploits / File injections / Spam / SQL injections.
+kibana_ngx_compress: true # Enables or disables compression.
 kibana_ngx_domain: 'navigate.example.com' # Defines domain name.
-kibana_ngx_pagespeed: false # Enables or disables pagespeed modules.
+kibana_ngx_pagespeed: true # Enables or disables pagespeed modules.
 kibana_ngx_port_http: '80' # NGinx HTTP listen port.
 kibana_ngx_port_https: '443' # NGinx HTTPs listen port.
 kibana_ngx_ssl_protocols: 'modern' # intermediate or modern, defines SSL protocol profile.
