@@ -48,7 +48,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### General parameters
 * `kibana_version`: Specify the Kibana version.
-* `kibana_selinux`: SELinux security policy.
 * `kibana_auth`: A boolean value, Enable or Disable authentication.
 * `kibana_user`: Authorization user name, do not modify it.
 * `kibana_pass`: Authorization user password.
@@ -101,7 +100,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 There are some variables in vars/main.yml:
 
 ## Dependencies
-- Ansible versions > 2.6 are supported.
+- Ansible versions >= 2.8 are supported.
 - [NGinx](https://github.com/goldstrike77/ansible-role-linux-nginx.git)
 - [Elasticsearch](https://github.com/goldstrike77/ansible-role-linux-elasticsearch.git)
 
@@ -124,7 +123,6 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     kibana_version: '7.1.1'
-    kibana_selinux: false
     kibana_auth: false
     kibana_user: 'elastic'
     kibana_pass: 'changeme'

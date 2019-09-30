@@ -2,7 +2,6 @@
 # General parameters #
 kibana_is_install: false # A boolean value, whether install the Kibana.
 kibana_version: '6.8.1' # Specify the Kibana version.
-kibana_selinux: false # SELinux security policy.
 kibana_auth: false # A boolean value, Enable or Disable authentication.
 kibana_user: 'elastic' # Authorization user name, do not modify it.
 kibana_pass: 'changeme' # Authorization user password.

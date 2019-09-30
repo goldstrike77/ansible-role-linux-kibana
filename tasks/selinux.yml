@@ -1,4 +1,8 @@
 ---
+- name: 'Set kibana_selinux to false for default'
+  set_fact:
+    kibana_selinux: '{{ false }}'
+
 - name: 'Get getenforce binary'
   stat:
     path: '/usr/sbin/getenforce'
