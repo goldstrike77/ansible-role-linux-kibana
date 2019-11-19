@@ -41,7 +41,7 @@ kibana_ngx_pagespeed: true # Enables or disables pagespeed modules.
 kibana_ngx_port_http: '80' # NGinx HTTP listen port.
 kibana_ngx_port_https: '443' # NGinx HTTPs listen port.
 kibana_ngx_ssl_protocols: 'modern' # intermediate or modern, defines SSL protocol profile.
-kibana_ngx_version: 'extras' # extras or standard
+kibana_ngx_version: 'standard' # extras or standard
 kibana_ngx_site_path: '/data/nginx/site' # Specify the NGinx site directory.
 kibana_ngx_logs_path: '/data/nginx/logs' # Specify the NGinx logs directory.
 
