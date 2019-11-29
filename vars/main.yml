@@ -1,1 +1,9 @@
 ---
+kibana_servers: "\
+  {% set _kibana_servers = [] %}\
+  {% for host in groups[group_names[-1]] %}\
+    {% if ( kibana_is_install ) %}\
+      {% if _kibana_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
+    {% endif %}\
+  {% endfor %}\
+  {{ _kibana_servers }}"

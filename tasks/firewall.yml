@@ -12,4 +12,6 @@
     state: 'enabled'
   loop:
     - '{{ kibana_port_server }}'
-  when: services_state.ansible_facts.services["firewalld.service"].state == 'running'
+  when:
+    - services_state.ansible_facts.services["firewalld.service"] is defined
+    - services_state.ansible_facts.services["firewalld.service"].state == 'running'
