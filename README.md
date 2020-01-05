@@ -51,6 +51,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `kibana_auth`: A boolean value, Enable or Disable authentication.
 * `kibana_user`: Authorization user name, do not modify it.
 * `kibana_pass`: Authorization user password.
+* `kibana_proxy`: Whether running behind a proxy.
 
 ##### Role dependencies
 * `kibana_elastic_dept`: A boolean value, whether ElasticSearch use the same environment.
@@ -123,6 +124,7 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     kibana_version: '7.1.1'
+    kibana_proxy: false
     kibana_auth: false
     kibana_user: 'elastic'
     kibana_pass: 'changeme'
