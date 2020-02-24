@@ -152,7 +152,6 @@ You can also use the group_vars or the host_vars files for setting the variables
       - '{{ ansible_default_ipv4.address }}'
     kibana_plugins:
       - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
-      - 'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
     environments: 'Development'
     tags:
       subscription: 'default'

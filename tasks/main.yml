@@ -27,6 +27,10 @@
   include: 'plugins.yml'
   when: kibana_plugins is defined
 
+- name: Include prometheus exporter tasks
+  include: 'exporter.yml'
+  when: exporter_is_install | bool
+
 - name: Reload the Kibana service
   shell: echo ''
   notify: 'Ensure Kibana service is enabled'
@@ -40,4 +44,4 @@
   when:
     - exporter_is_install | bool
     - consul_public_register | bool
-    - kibana_plugin is succeeded
+    - kibana_prometheus_plugin is succeeded

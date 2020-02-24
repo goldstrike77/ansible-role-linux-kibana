@@ -1,0 +1,11 @@
+---
+- name: Install kibana prometheus plugins
+  shell: '/usr/share/kibana/bin/kibana-plugin install -q -s http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
+  become: 'yes'
+  become_user: 'kibana'
+  register: kibana_prometheus_plugin
+  until: kibana_prometheus_plugin is succeeded
+  retries: 5
+  delay: 3
+  changed_when: false
+  failed_when: false
