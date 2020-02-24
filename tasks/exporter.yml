@@ -1,4 +1,26 @@
 ---
+- name: Create Prometheus export user.
+  uri:
+    url: 'http://{{ kibana_servers[0] }}:{{ kibana_elastic_port }}/_xpack/security/user/prometheus'
+    method: 'POST'
+    user: '{{ kibana_user }}'
+    password: '{{ kibana_pass }}'
+    body: '{"password": "password", "roles": [ "monitoring_user" ], "full_name": "Prometheus"}'
+    body_format: 'json'
+    force_basic_auth: 'yes'
+  environment:
+    no_proxy: '{{ kibana_servers[0] }}'
+  when:
+    - kibana_auth | bool
+    - kibana_servers[0] in ansible_default_ipv4.address
+  register: kibana_prometheus_user_add_status
+  until: kibana_prometheus_user_add_status.status == 200
+  retries: 3
+  delay: 3
+  changed_when: false
+  failed_when: false
+  no_log: true
+
 - name: Install kibana prometheus plugins
   shell: '/usr/share/kibana/bin/kibana-plugin install -q -s http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
   become: 'yes'
