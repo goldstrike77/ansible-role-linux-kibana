@@ -8,3 +8,11 @@
     group: 'root'
     mode: '0644'
   register: kibana_config
+
+- name: Increased the Kibana heap size
+  lineinfile:
+    state: 'present'
+    dest: '/etc/default/kibana'
+    regexp: '^NODE_OPTIONS'
+    line: 'NODE_OPTIONS="--max-old-space-size=4096"'
+  register: kibana_heap
