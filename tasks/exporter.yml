@@ -1,10 +1,11 @@
 ---
 - name: Create Prometheus export user.
   uri:
-    url: 'http://{{ kibana_servers[0] }}:{{ kibana_elastic_port }}/_xpack/security/user/prometheus'
+    url: '{% if kibana_elastic_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}://{{ kibana_servers[0] }}:{{ kibana_elastic_port }}/_xpack/security/user/prometheus'
     method: 'POST'
     user: '{{ kibana_user }}'
     password: '{{ kibana_pass }}'
+    validate_certs: 'no'
     body: '{"password": "password", "roles": [ "monitoring_user" ], "full_name": "Prometheus"}'
     body_format: 'json'
     force_basic_auth: 'yes'

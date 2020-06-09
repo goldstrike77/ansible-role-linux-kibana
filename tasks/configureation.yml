@@ -4,9 +4,9 @@
     src: 'kibana.yml.j2'
     dest: '/etc/kibana/kibana.yml'
     backup: 'yes'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
+    owner: 'kibana'
+    group: 'kibana'
+    mode: '0640'
   register: kibana_config
 
 - name: Increased the Kibana heap size
@@ -16,3 +16,12 @@
     regexp: '^NODE_OPTIONS'
     line: 'NODE_OPTIONS="--max-old-space-size=4096"'
   register: kibana_heap
+
+- name: Kibana PKI file transfer
+  copy:
+    src: 'ssl/'
+    dest: '/etc/kibana/ssl'
+    owner: 'root'
+    group: 'kibana'
+    mode: '0640'
+  register: kibana_pki

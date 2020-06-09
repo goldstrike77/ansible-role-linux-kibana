@@ -101,7 +101,7 @@ dependencies:
             - '  proxy_set_header X-Forwarded-Server $host;'
             - '  proxy_set_header X-Real-IP $remote_addr;'
             - '  proxy_set_header X-Scheme $scheme;'
-            - '  proxy_pass http://backend_{{ kibana_ngx_domain }};'
+            - '  proxy_pass {% if kibana_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}://backend_{{ kibana_ngx_domain }};'
             - '}'
           backend_address: '{{ kibana_servers }}'
           backend_port: '{{ kibana_port_server }}'
@@ -110,13 +110,15 @@ dependencies:
     when: kibana_ngx_dept | bool
   - role: 'ansible-role-linux-elasticsearch'
     vars:
-      elastic_auth: '{{ kibana_auth | bool | to_json }}'
+      elastic_auth: '{{ kibana_auth | bool }}'
       elastic_cluster: '{{ kibana_elastic_cluster }}'
+      elastic_https: '{{ kibana_elastic_https | bool }}'
       elastic_pass: '{{ kibana_pass }}'
       elastic_path: '{{ kibana_elastic_path }}'
       elastic_port_rest: '{{ kibana_elastic_port_rest }}'
       elastic_servers: '{% if elastic_node_type == "coordinat" %}{{ kibana_elastic_hosts }}{% else %}{{ kibana_servers }}{% endif %}'
       elastic_version: '{{ kibana_version }}'
       elastic_heap_size: '{{ kibana_elastic_heap_size }}'
+      elastic_memory_lock: '{{ kibana_elastic_memory_lock | bool }}'
       elastic_node_type: '{{ kibana_elastic_node_type }}'
     when: kibana_elastic_dept | bool

@@ -26,7 +26,7 @@ __Table of Contents__
 - [Contributors](#Contributors)
 
 ## Overview
-This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.
+This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. Kibana is an open source data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data.
 
 ## Requirements
 ### Operating systems
@@ -49,6 +49,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `kibana_auth`: A boolean value, Enable or Disable authentication.
 * `kibana_user`: Authorization user name, do not modify it.
 * `kibana_pass`: Authorization user password.
+* `kibana_https`: A boolean value, whether Encrypting HTTP client communications.
 * `kibana_proxy`: Whether running behind a proxy.
 
 ##### Role dependencies
@@ -76,12 +77,13 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `kibana_ngx_logs_path`: Specify the NGinx logs directory.
 
 ##### Elastic parameters
+* `kibana_elastic_https`: A boolean value, whether Encrypting HTTP client communications.
 * `kibana_elastic_cluster`: Specify name for your Elastic cluster name.
 * `kibana_elastic_path`: Specify the ElasticSearch data directory.
 * `kibana_elastic_port_rest`: Elasticsearch REST port.
 * `kibana_elastic_node_type`: Type of nodes: default, master, data, ingest and coordinat.
 * `kibana_elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
-* `kibana_elastic_hosts`: List of Elasticsearch hosts.
+* `kibana_elastic_memory_lock`: A boolean value, whether lock the process address space into memory on startup.
 
 ##### Plugins
 * `kibana_plugins`: Plug-in List.
@@ -110,7 +112,7 @@ There are some variables in vars/main.yml:
 ### Hosts inventory file
 See tests/inventory for an example.
 
-    node01 ansible_host='192.168.1.10' kibana_version='7.1.1'
+    node01 ansible_host='192.168.1.10'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -118,20 +120,21 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: all
       roles:
          - role: ansible-role-linux-kibana
-           kibana_version: '7.1.1'
+           kibana_version: '7.6.2'
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-    kibana_version: '7.1.1'
+    kibana_version: '7.6.2'
     kibana_proxy: false
     kibana_auth: false
     kibana_user: 'elastic'
     kibana_pass: 'changeme'
+    kibana_https: false
     kibana_elastic_dept: false
     kibana_ngx_dept: false
     kibana_port_server: '5601'
-    kibana_elastic_host: '127.0.0.1'
+    kibana_elastic_host: '{{ ansible_default_ipv4.address }}'
     kibana_elastic_port: '9200'
     kibana_ngx_block_agents: false
     kibana_ngx_block_string: false
@@ -144,13 +147,13 @@ You can also use the group_vars or the host_vars files for setting the variables
     kibana_ngx_version: 'extras'
     kibana_ngx_site_path: '/data/nginx_site'
     kibana_ngx_logs_path: '/data/nginx_logs'
+    kibana_elastic_https: false
     kibana_elastic_cluster: 'ossec'
     kibana_elastic_path: '/data'
     kibana_elastic_port_rest: '9200'
     kibana_elastic_node_type: 'default'
     kibana_elastic_heap_size: '3g'
-    kibana_elastic_hosts:
-      - '{{ ansible_default_ipv4.address }}'
+    kibana_elastic_memory_lock: false
     kibana_plugins:
       - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
     environments: 'Development'

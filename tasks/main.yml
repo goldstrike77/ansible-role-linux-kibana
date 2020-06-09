@@ -34,7 +34,7 @@
 - name: Reload the Kibana service
   shell: echo ''
   notify: 'Ensure Kibana service is enabled'
-  when: kibana_config is changed or kibana_update is changed or kibana_plugin is changed or kibana_heap is changed
+  when: kibana_config is changed or kibana_update is changed or kibana_plugin is changed or kibana_heap is changed or kibana_pki is changed
 
 - name: Force the handler to run immediately
   meta: flush_handlers

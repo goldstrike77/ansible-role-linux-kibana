@@ -1,10 +1,11 @@
 ---
 # General parameters #
 kibana_is_install: false # A boolean value, whether install the Kibana.
-kibana_version: '6.8.1' # Specify the Kibana version.
+kibana_version: '7.6.2' # Specify the Kibana version.
 kibana_auth: false # A boolean value, Enable or Disable authentication.
 kibana_user: 'elastic' # Authorization user name, do not modify it.
 kibana_pass: 'changeme' # Authorization user password.
+kibana_https: false # A boolean value, whether Encrypting HTTP client communications.
 kibana_proxy: false # Whether running behind a proxy.
 
 # Role dependencies #
@@ -15,7 +16,7 @@ kibana_ngx_dept: false # A boolean value, whether proxy web interface and API tr
 kibana_port_server: '5601' # Kibana server port.
 
 # Elasticsearch parameters #
-kibana_elastic_host: '127.0.0.1' # Elasticsearch instances.
+kibana_elastic_host: '{{ ansible_default_ipv4.address }}' # Elasticsearch instances.
 kibana_elastic_port: '9200' # Elasticsearch REST port.
 
 # NGinx parameters #
@@ -32,13 +33,13 @@ kibana_ngx_site_path: '/data/nginx/site' # Specify the NGinx site directory.
 kibana_ngx_logs_path: '/data/nginx/logs' # Specify the NGinx logs directory.
 
 # Elastic parameters #
+kibana_elastic_https: false # A boolean value, whether Encrypting HTTP client communications.
 kibana_elastic_cluster: 'ossec' # Specify name for your Elastic cluster name.
 kibana_elastic_path: '/data' # Specify the ElasticSearch data directory.
 kibana_elastic_port_rest: '9200' # Elasticsearch REST port.
 kibana_elastic_node_type: 'default' # Type of nodes: default, master, data, ingest and coordinat.
 kibana_elastic_heap_size: '2g' # Specify the maximum memory allocation pool for a Java virtual machine.
-kibana_elastic_hosts: # List of Elasticsearch hosts.
-  - '{{ ansible_default_ipv4.address }}'
+kibana_elastic_memory_lock: false # A boolean value, whether lock the process address space into memory on startup.
 
 # Plugins #
 #kibana_plugins: # Plug-in List.
