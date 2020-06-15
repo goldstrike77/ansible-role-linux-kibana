@@ -10,7 +10,7 @@ ___
 __Table of Contents__
 
 - [Overview](#overview)
-- [Logging vs Monitoring](Logging-vs-Monitoring)
+- [Logging vs Monitoring](#logging-vs-monitoring)
 - [Requirements](#requirements)
   * [Operating systems](#operating-systems)
   * [Kibana Versions](#kibana-versions)
