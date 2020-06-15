@@ -16,12 +16,3 @@
     regexp: '^NODE_OPTIONS'
     line: 'NODE_OPTIONS="--max-old-space-size=4096"'
   register: kibana_heap
-
-- name: Kibana PKI file transfer
-  copy:
-    src: 'ssl/'
-    dest: '/etc/kibana/ssl'
-    owner: 'root'
-    group: 'kibana'
-    mode: '0640'
-  register: kibana_pki

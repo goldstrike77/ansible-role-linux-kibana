@@ -20,8 +20,12 @@
 - name: Include firewall tasks
   include: 'firewall.yml'
 
-- name: Configuration the elasticsearch
+- name: Configuration the kibana
   include: 'configureation.yml'
+
+- name: Include certificate tasks
+  include: 'certificates.yml'
+  when: kibana_https | bool
 
 - name: Include plugins tasks
   include: 'plugins.yml'
@@ -34,7 +38,7 @@
 - name: Reload the Kibana service
   shell: echo ''
   notify: 'Ensure Kibana service is enabled'
-  when: kibana_config is changed or kibana_update is changed or kibana_plugin is changed or kibana_heap is changed or kibana_pki is changed
+  when: kibana_config is changed or kibana_update is changed or kibana_plugin is changed or kibana_heap is changed
 
 - name: Force the handler to run immediately
   meta: flush_handlers
