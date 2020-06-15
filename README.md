@@ -10,6 +10,7 @@ ___
 __Table of Contents__
 
 - [Overview](#overview)
+- [Logging vs Monitoring](Logging-vs-Monitoring)
 - [Requirements](#requirements)
   * [Operating systems](#operating-systems)
   * [Kibana Versions](#kibana-versions)
@@ -26,11 +27,14 @@ __Table of Contents__
 - [Contributors](#Contributors)
 
 ## Overview
-This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. Kibana is an open source data visualization dashboard for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster. Users can create bar, line and scatter plots, or pie charts and maps on top of large volumes of data.
+Kibana is the 'K' in the ELK Stack, the world’s most popular open-source log analysis platform, and provides users with a tool for exploring, visualizing, and building dashboards on top of the log data stored in Elasticsearch clusters. Kibana’s core feature is data querying and analysis. Using various methods, users can search the data indexed in Elasticsearch for specific events or strings within their data for root cause analysis and diagnostics. Based on these queries, users can use Kibana’s visualization features which allow users to visualize data in a variety of different ways, using charts, tables, geographical maps and other types of visualizations.
+
+## Logging vs Monitoring
+The key difference between the Grafana and Kibana. Grafana is designed for analyzing and visualizing metrics such as system CPU, memory, disk and I/O utilization. Grafana does not allow full-text data querying. Kibana, on the other hand, runs on top of Elasticsearch and is used primarily for analyzing log messages. If you are building a monitoring system, both can do the job pretty well, though there are still some differences that will be outlined below. If it’s logs you’re after, for any of the use cases that logs support - troubleshooting, forensics, development, security, Kibana is your choice.
 
 ## Requirements
 ### Operating systems
-This role will work on the following operating systems:
+This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. This role will work on the following operating systems:
 
   * CentOS 7
 
@@ -92,7 +96,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `environments`: Define the service environment.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
-* `consul_public_register`: false Whether register a exporter service with public consul client.
+* `consul_public_register`: Whether register a exporter service with public consul client.
 * `consul_public_exporter_token`: Public Consul client ACL token.
 * `consul_public_http_prot`: The consul Hypertext Transfer Protocol.
 * `consul_public_clients`: List of public consul clients.
@@ -117,59 +121,63 @@ See tests/inventory for an example.
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: all
-      roles:
-         - role: ansible-role-linux-kibana
-           kibana_version: '7.6.2'
+```yaml
+- hosts: all
+  roles:
+     - role: ansible-role-linux-kibana
+       kibana_version: '7.6.2'
+```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-    kibana_version: '7.6.2'
-    kibana_proxy: false
-    kibana_auth: false
-    kibana_user: 'elastic'
-    kibana_pass: 'changeme'
-    kibana_https: false
-    kibana_elastic_dept: false
-    kibana_ngx_dept: false
-    kibana_port_server: '5601'
-    kibana_elastic_host: '{{ ansible_default_ipv4.address }}'
-    kibana_elastic_port: '9200'
-    kibana_ngx_block_agents: false
-    kibana_ngx_block_string: false
-    kibana_ngx_compress: false
-    kibana_ngx_domain: 'navigate.example.com'
-    kibana_ngx_pagespeed: false
-    kibana_ngx_port_http: '80'
-    kibana_ngx_port_https: '443'
-    kibana_ngx_ssl_protocols: 'modern'
-    kibana_ngx_version: 'extras'
-    kibana_ngx_site_path: '/data/nginx_site'
-    kibana_ngx_logs_path: '/data/nginx_logs'
-    kibana_elastic_https: false
-    kibana_elastic_cluster: 'ossec'
-    kibana_elastic_path: '/data'
-    kibana_elastic_port_rest: '9200'
-    kibana_elastic_node_type: 'default'
-    kibana_elastic_heap_size: '3g'
-    kibana_elastic_memory_lock: false
-    kibana_plugins:
-      - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
-    environments: 'Development'
-    tags:
-      subscription: 'default'
-      owner: 'nobody'
-      department: 'Infrastructure'
-      organization: 'The Company'
-      region: 'IDC01'
-    exporter_is_install: false
-    consul_public_register: false
-    consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
-    consul_public_http_prot: 'https'
-    consul_public_http_port: '8500'
-    consul_public_clients:
-      - '127.0.0.1'
+```yaml
+kibana_version: '7.6.2'
+kibana_proxy: false
+kibana_auth: false
+kibana_user: 'elastic'
+kibana_pass: 'changeme'
+kibana_https: false
+kibana_elastic_dept: false
+kibana_ngx_dept: false
+kibana_port_server: '5601'
+kibana_elastic_host: '{{ ansible_default_ipv4.address }}'
+kibana_elastic_port: '9200'
+kibana_ngx_block_agents: false
+kibana_ngx_block_string: false
+kibana_ngx_compress: false
+kibana_ngx_domain: 'navigate.example.com'
+kibana_ngx_pagespeed: false
+kibana_ngx_port_http: '80'
+kibana_ngx_port_https: '443'
+kibana_ngx_ssl_protocols: 'modern'
+kibana_ngx_version: 'extras'
+kibana_ngx_site_path: '/data/nginx_site'
+kibana_ngx_logs_path: '/data/nginx_logs'
+kibana_elastic_https: false
+kibana_elastic_cluster: 'ossec'
+kibana_elastic_path: '/data'
+kibana_elastic_port_rest: '9200'
+kibana_elastic_node_type: 'default'
+kibana_elastic_heap_size: '3g'
+kibana_elastic_memory_lock: false
+kibana_plugins:
+  - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
+environments: 'Development'
+tags:
+  subscription: 'default'
+  owner: 'nobody'
+  department: 'Infrastructure'
+  organization: 'The Company'
+  region: 'IDC01'
+exporter_is_install: false
+consul_public_register: false
+consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
+consul_public_http_prot: 'https'
+consul_public_http_port: '8500'
+consul_public_clients:
+  - '127.0.0.1'
+```
 
 ## License
 ![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)
