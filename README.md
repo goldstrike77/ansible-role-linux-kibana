@@ -30,11 +30,11 @@ __Table of Contents__
 Kibana is the 'K' in the ELK Stack, the world’s most popular open-source log analysis platform, and provides users with a tool for exploring, visualizing, and building dashboards on top of the log data stored in Elasticsearch clusters. Kibana’s core feature is data querying and analysis. Using various methods, users can search the data indexed in Elasticsearch for specific events or strings within their data for root cause analysis and diagnostics. Based on these queries, users can use Kibana’s visualization features which allow users to visualize data in a variety of different ways, using charts, tables, geographical maps and other types of visualizations.
 
 ## Logging vs Monitoring
-The key difference between the Grafana and Kibana. Grafana is designed for analyzing and visualizing metrics such as system CPU, memory, disk and I/O utilization. Grafana does not allow full-text data querying. Kibana, on the other hand, runs on top of Elasticsearch and is used primarily for analyzing log messages. If you are building a monitoring system, both can do the job pretty well, though there are still some differences that will be outlined below. If it’s logs you’re after, for any of the use cases that logs support - troubleshooting, forensics, development, security, Kibana is your choice.
+The key difference between the Grafana and Kibana. Grafana is designed for analyzing and visualizing metrics such as system CPU, memory, disk and I/O utilization. Grafana does not allow full-text data querying. Kibana, on the other hand, runs on top of Elasticsearch and is used primarily for analyzing log messages. If you are building a monitoring system, both can do the job pretty well, though there are still some differences that will be outlined below. If it’s logs you’re after, for any of the use cases that logs support troubleshooting, forensics, development, security, Kibana is your choice.
 
 ## Requirements
 ### Operating systems
-This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. This role will work on the following operating systems:
+This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features, Will work on the following operating systems:
 
   * CentOS 7
 
@@ -129,7 +129,7 @@ Including an example of how to use your role (for instance, with variables passe
 ```
 
 ### Combination of group vars and playbook
-You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
+You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
 kibana_version: '7.6.2'
