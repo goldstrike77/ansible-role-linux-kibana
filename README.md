@@ -34,7 +34,7 @@ The key difference between the Grafana and Kibana. Grafana is designed for analy
 
 ## Requirements
 ### Operating systems
-This Ansible role installs Kibana on linux operating system, including establishing a filesystem structure and server configuration with some common operational features, Will work on the following operating systems:
+This Ansible role installs Kibana on Linux operating system, including establishing a filesystem structure and server configuration with some common operational features, Will works on the following operating systems:
 
   * CentOS 7
 
@@ -125,19 +125,19 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: all
   roles:
      - role: ansible-role-linux-kibana
-       kibana_version: '7.6.2'
+       kibana_version: '7.7.1'
 ```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-kibana_version: '7.6.2'
+kibana_version: '7.7.1'
 kibana_proxy: false
-kibana_auth: false
+kibana_auth: true
 kibana_user: 'elastic'
 kibana_pass: 'changeme'
-kibana_https: false
+kibana_https: true
 kibana_elastic_dept: false
 kibana_ngx_dept: false
 kibana_port_server: '5601'
@@ -154,7 +154,7 @@ kibana_ngx_ssl_protocols: 'modern'
 kibana_ngx_version: 'extras'
 kibana_ngx_site_path: '/data/nginx_site'
 kibana_ngx_logs_path: '/data/nginx_logs'
-kibana_elastic_https: false
+kibana_elastic_https: true
 kibana_elastic_cluster: 'ossec'
 kibana_elastic_path: '/data'
 kibana_elastic_port_rest: '9200'

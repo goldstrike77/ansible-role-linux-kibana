@@ -1,11 +1,11 @@
 ---
 # General parameters #
 kibana_is_install: false # A boolean value, whether install the Kibana.
-kibana_version: '7.6.2' # Specify the Kibana version.
-kibana_auth: false # A boolean value, Enable or Disable authentication.
+kibana_version: '7.7.1' # Specify the Kibana version.
+kibana_auth: true # A boolean value, Enable or Disable authentication.
 kibana_user: 'elastic' # Authorization user name, do not modify it.
 kibana_pass: 'changeme' # Authorization user password.
-kibana_https: false # A boolean value, whether Encrypting HTTP client communications.
+kibana_https: true # A boolean value, whether Encrypting HTTP client communications.
 kibana_proxy: false # Whether running behind a proxy.
 
 # Role dependencies #
@@ -33,7 +33,7 @@ kibana_ngx_site_path: '/data/nginx/site' # Specify the NGinx site directory.
 kibana_ngx_logs_path: '/data/nginx/logs' # Specify the NGinx logs directory.
 
 # Elastic parameters #
-kibana_elastic_https: false # A boolean value, whether Encrypting HTTP client communications.
+kibana_elastic_https: true # A boolean value, whether Encrypting HTTP client communications.
 kibana_elastic_cluster: 'ossec' # Specify name for your Elastic cluster name.
 kibana_elastic_path: '/data' # Specify the ElasticSearch data directory.
 kibana_elastic_port_rest: '9200' # Elasticsearch REST port.
