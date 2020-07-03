@@ -35,7 +35,7 @@
       openssl_privatekey:
         path: '{{ kibana_cert_path }}/server.key'
         select_crypto_backend: 'cryptography'
-        size: '2048'
+        size: '4096'
         type: 'RSA'
         owner: 'root'
         mode: '0644'
@@ -49,6 +49,7 @@
         subject_alt_name:
           - 'DNS:{{ ansible_hostname }}'
           - 'DNS:{{ ansible_fqdn }}'
+          - 'DNS:{{ group_names[-1] | upper | regex_replace("_", "-") }}-{{ environments | upper | regex_replace("_", "-") }}-kibana.service.{{ datacenter | lower }}.{{ domain | lower }}'
           - 'IP:{{ ansible_default_ipv4.address }}'
         owner: 'root'
         mode: '0644'

@@ -4,4 +4,5 @@ kibana_repo_url: "http://mirrors.tuna.tsinghua.edu.cn/elasticstack/{{ kibana_ver
 kibana_packages:
   - 'kibana-{{ kibana_version }}-1'
   - 'libselinux-utils'
+  - 'python-pip'
   - 'policycoreutils-python'
