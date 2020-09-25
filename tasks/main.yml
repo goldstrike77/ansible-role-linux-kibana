@@ -1,5 +1,5 @@
 ---
-- name: Gather Kibana node variables for cluster
+- name: Gather Kibana node variables for cluster.
   set_fact:
     kibana_servers: "\
       {% set _kibana_servers = [] %}\
@@ -11,39 +11,50 @@
       {{ _kibana_servers }}"
   when: kibana_servers is not defined
 
-- name: Include tasks for specific OS
+- name: Include tasks for specific OS.
   include: '{{ ansible_os_family }}.yml'
 
-- name: Straight to getenforce selinux status
+- name: Straight to getenforce selinux status.
   include: 'selinux.yml'
 
-- name: Include firewall tasks
+- name: Include firewall tasks.
   include: 'firewall.yml'
 
-- name: Configuration the kibana
+- name: Configuration the kibana.
   include: 'configureation.yml'
 
-- name: Include certificate tasks
+- name: Include certificate tasks.
   include: 'certificates.yml'
   when: kibana_https | bool
 
-- name: Include plugins tasks
+- name: Ensure directory permissions.
+  file:
+    dest: '{{ item }}'
+    state: 'directory'
+    owner: 'kibana'
+    group: 'kibana'
+    mode: '0755'
+  loop:
+    - '/usr/share/kibana/optimize'
+    - '/usr/share/kibana/plugins'
+
+- name: Include plugins tasks.
   include: 'plugins.yml'
   when: kibana_plugins is defined
 
-- name: Include prometheus exporter tasks
+- name: Include prometheus exporter tasks.
   include: 'exporter.yml'
   when: exporter_is_install | bool
 
-- name: Reload the Kibana service
+- name: Reload the Kibana service.
   shell: echo ''
   notify: 'Ensure Kibana service is enabled'
   when: kibana_config is changed or kibana_update is changed or kibana_plugin is changed or kibana_heap is changed
 
-- name: Force the handler to run immediately
+- name: Force the handler to run immediately.
   meta: flush_handlers
 
-- name: Registered with HashiCorp Consul
+- name: Registered with HashiCorp Consul.
   include: 'register.yml'
   when:
     - exporter_is_install | bool

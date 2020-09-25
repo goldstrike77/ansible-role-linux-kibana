@@ -1,8 +1,8 @@
 ---
-- name: Include OS-specific variables
+- name: Include OS-specific variables.
   include_vars: '{{ ansible_os_family }}.yml'
 
-- name: 'Add Kibana {{ kibana_version.split(".")[0] }} YUM repositories'
+- name: Add Kibana YUM repositories.
   yum_repository:
     name: '{{ kibana_repo_name }}'
     description: '{{ kibana_repo_name }} YUM repository'
@@ -11,7 +11,7 @@
     gpgcheck: 'no'
     timeout: '60'
 
-- name: Install the Kibana packages
+- name: Install the Kibana packages.
   yum:
     name: '{{ kibana_packages }}'
     state: 'present'
@@ -21,5 +21,5 @@
     disable_gpg_check: 'yes'
   register: kibana_update
   until: kibana_update is succeeded
-  retries: 3
-  delay: 5
+  retries: 5
+  delay: 2

@@ -57,11 +57,11 @@ dependencies:
   # if you add dependencies to this list.
   - role: 'ansible-role-linux-nginx'
     vars:
-      ngx_block_agents: '{{ kibana_ngx_block_agents | bool | to_json }}'
-      ngx_block_string: '{{ kibana_ngx_block_string | bool | to_json }}'
-      ngx_compress: '{{ kibana_ngx_compress | bool | to_json }}'
+      ngx_block_agents: '{{ kibana_ngx_block_agents | bool }}'
+      ngx_block_string: '{{ kibana_ngx_block_string | bool }}'
+      ngx_compress: '{{ kibana_ngx_compress | bool }}'
       ngx_domain: '{{ kibana_ngx_domain }}'
-      ngx_pagespeed: '{{ kibana_ngx_pagespeed | bool | to_json}}'
+      ngx_pagespeed: '{{ kibana_ngx_pagespeed | bool }}'
       ngx_port_http: '{{ kibana_ngx_port_http }}'
       ngx_port_https: '{{ kibana_ngx_port_https }}'
       ngx_ssl_protocols: '{{ kibana_ngx_ssl_protocols }}'

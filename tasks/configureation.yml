@@ -1,5 +1,5 @@
 ---
-- name: Kibana Configure file transfer
+- name: Kibana Configure file transfer.
   template:
     src: 'kibana.yml.j2'
     dest: '/etc/kibana/kibana.yml'
@@ -9,7 +9,7 @@
     mode: '0640'
   register: kibana_config
 
-- name: Increased the Kibana heap size
+- name: Increased the Kibana heap size.
   lineinfile:
     state: 'present'
     dest: '/etc/default/kibana'

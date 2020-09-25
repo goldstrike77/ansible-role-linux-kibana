@@ -22,13 +22,18 @@
   failed_when: false
   no_log: true
 
-- name: Install kibana prometheus plugins
-  shell: '/usr/share/kibana/bin/kibana-plugin install -q -s http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
+- name: Install kibana prometheus plugins.
+  shell: >-
+    NODE_OPTIONS="--no-warnings --max-old-space-size=4096" /usr/share/kibana/bin/kibana-plugin install
+    'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibana-prometheus-exporter-{{ kibana_version }}.zip'
+  args:
+    executable: '/bin/bash'
+    chdir: '/usr/share/kibana'
   become: 'yes'
   become_user: 'kibana'
   register: kibana_prometheus_plugin
   until: kibana_prometheus_plugin is succeeded
   retries: 5
-  delay: 3
+  delay: 2
   changed_when: false
   failed_when: false

@@ -1,9 +1,9 @@
 ---
-- name: Gathering service facts
+- name: Gathering service facts.
   service_facts:
   register: services_state
 
-- name: Allow Kibana service port
+- name: Allow Kibana service port.
   firewalld:
     port: '{{ item }}/tcp'
     zone: 'public'

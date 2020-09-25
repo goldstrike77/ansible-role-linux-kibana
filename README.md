@@ -127,14 +127,14 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: all
   roles:
      - role: ansible-role-linux-kibana
-       kibana_version: '7.7.1'
+       kibana_version: '7.9.1'
 ```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-kibana_version: '7.7.1'
+kibana_version: '7.9.1'
 kibana_proxy: false
 kibana_auth: true
 kibana_user: 'elastic'
