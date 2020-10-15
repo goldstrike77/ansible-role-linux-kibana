@@ -11,7 +11,7 @@
   failed_when: false
   register: check_consul_local
 
-- name: Register service with an http health check.
+- name: Register service with an health check.
   uri:
     url: '{{ consul_public_http_prot }}://{{ ansible_default_ipv4.address }}:{{ consul_public_http_port }}/v1/agent/service/register'
     method: 'PUT'
@@ -47,11 +47,11 @@
   failed_when: false
   register: check_consul_reg
 
-- name: Register exporter service with an http health check
+- name: Register exporter with an health check.
   uri:
     url: '{{ consul_public_http_prot }}://{{ item.client }}:{{ consul_public_http_port }}/v1/agent/service/register'
     method: 'PUT'
-    body: '{"tags":["prometheus","exporter"],"ID":"{{ inventory_hostname | upper }}_kibana_exporter","name":"kibana_exporter","address":"{{ ansible_default_ipv4.address }}","port":{{ kibana_port_server }},"meta":{"scheme":"{% if kibana_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}","metrics_path":"{% if kibana_proxy | bool %}/kibana{% endif %}/_prometheus/metrics","instance":"{{ inventory_hostname | upper }}","group":"{{ group_names[-1] | upper }}","datacenter": "{{ datacenter | lower }}","domain":"{{ domain | lower }}","environment":"{{ environments | upper }}"{% if tags is defined %},{{ tags | to_json | regex_replace("{") | regex_replace("}") }}{% endif %}},"checks":[{"http":"{% if kibana_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}://{{ ansible_default_ipv4.address }}:{{ kibana_port_server }}{% if kibana_proxy | bool %}/kibana{% endif %}/_prometheus/metrics","interval":"60s","tls_skip_verify":true,"method":"HEAD","timeout":"10s"}]}'
+    body: '{"tags":["prometheus","exporter"],"ID":"{{ inventory_hostname | upper }}_kibana_exporter","name":"kibana_exporter","address":"{{ ansible_default_ipv4.address }}","port":{{ kibana_port_server }},"meta":{"application":"Visualization","scheme":"{% if kibana_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}","metrics_path":"{% if kibana_proxy | bool %}/kibana{% endif %}/_prometheus/metrics","instance":"{{ inventory_hostname | upper }}","group":"{{ group_names[-1] | upper }}","datacenter": "{{ datacenter | lower }}","domain":"{{ domain | lower }}","environment":"{{ environments | upper }}"{% if tags is defined %},{{ tags | to_json | regex_replace("{") | regex_replace("}") }}{% endif %}},"checks":[{"http":"{% if kibana_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}://{{ ansible_default_ipv4.address }}:{{ kibana_port_server }}{% if kibana_proxy | bool %}/kibana{% endif %}/_prometheus/metrics","interval":"60s","tls_skip_verify":true,"method":"HEAD","timeout":"10s"}]}'
     body_format: 'json'
     status_code: '200'
     headers:

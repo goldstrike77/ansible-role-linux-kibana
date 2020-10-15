@@ -1,6 +1,6 @@
 ---
 kibana_repo_name: 'elasticsearch'
-kibana_repo_url: "http://mirrors.tuna.tsinghua.edu.cn/elasticstack/{{ kibana_version.split('.')[0] }}.x/yum"
+kibana_repo_url: "http://mirrors.tuna.tsinghua.edu.cn/elasticstack/{{ kibana_version.split('.')[0] }}.x/yum/"
 kibana_packages:
   - 'kibana-{{ kibana_version }}-1'
   - 'libselinux-utils'
