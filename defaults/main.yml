@@ -1,7 +1,7 @@
 ---
 # General parameters #
 kibana_is_install: false # A boolean value, whether install the Kibana.
-kibana_version: '7.9.1' # Specify the Kibana version.
+kibana_version: '7.9.3' # Specify the Kibana version.
 kibana_auth: true # A boolean value, Enable or Disable authentication.
 kibana_user: 'elastic' # Authorization user name, do not modify it.
 kibana_pass: 'changeme' # Authorization user password.
@@ -24,11 +24,9 @@ kibana_ngx_block_agents: true # Enables or disables block unsafe User Agents.
 kibana_ngx_block_string: true # Enables or disables block includes Exploits / File injections / Spam / SQL injections.
 kibana_ngx_compress: true # Enables or disables compression.
 kibana_ngx_domain: 'navigate.example.com' # Defines domain name.
-kibana_ngx_pagespeed: false # Enables or disables pagespeed modules.
 kibana_ngx_port_http: '80' # NGinx HTTP listen port.
 kibana_ngx_port_https: '443' # NGinx HTTPs listen port.
 kibana_ngx_ssl_protocols: 'modern' # intermediate or modern, defines SSL protocol profile.
-kibana_ngx_version: 'standard' # extras or standard
 kibana_ngx_site_path: '/data/nginx/site' # Specify the NGinx site directory.
 kibana_ngx_logs_path: '/data/nginx/logs' # Specify the NGinx logs directory.
 
@@ -46,9 +44,10 @@ kibana_elastic_memory_lock: false # A boolean value, whether lock the process ad
 #  - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
 
 # Service Mesh #
-environments: 'Development' # Define the service environment.
+environments: 'prd' # Define the service environment.
 datacenter: 'dc01' # Define the DataCenter.
 domain: 'local' # Define the Domain.
+customer: 'demo' # Define the customer name.
 #tags: # Define the service custom label.
 #  subscription: 'default'
 #  owner: 'nobody'

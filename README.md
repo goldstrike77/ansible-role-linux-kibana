@@ -72,11 +72,9 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `kibana_ngx_block_string`: Enables or disables block includes Exploits / File injections / Spam / SQL injections.
 * `kibana_ngx_compress`: Enables or disables compression.
 * `kibana_ngx_domain`: Defines domain name.
-* `kibana_ngx_pagespeed`: Enables or disables pagespeed modules.
 * `kibana_ngx_port_http`: NGinx HTTP listen port.
 * `kibana_ngx_port_https`: NGinx HTTPs listen port.
 * `kibana_ngx_ssl_protocols`: intermediate or modern, defines SSL protocol profile.
-* `kibana_ngx_version`: extras or standard
 * `kibana_ngx_site_path`: Specify the NGinx site directory.
 * `kibana_ngx_logs_path`: Specify the NGinx logs directory.
 
@@ -96,6 +94,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `environments`: Define the service environment.
 * `datacenter`: Define the DataCenter.
 * `domain`: Define the Domain.
+* `customer`: Define the customer name.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
 * `consul_public_register`: Whether register a exporter service with public consul client.
@@ -127,14 +126,14 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: all
   roles:
      - role: ansible-role-linux-kibana
-       kibana_version: '7.9.1'
+       kibana_version: '7.9.3'
 ```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-kibana_version: '7.9.1'
+kibana_version: '7.9.3'
 kibana_proxy: false
 kibana_auth: true
 kibana_user: 'elastic'
@@ -149,11 +148,9 @@ kibana_ngx_block_agents: false
 kibana_ngx_block_string: false
 kibana_ngx_compress: false
 kibana_ngx_domain: 'navigate.example.com'
-kibana_ngx_pagespeed: false
 kibana_ngx_port_http: '80'
 kibana_ngx_port_https: '443'
 kibana_ngx_ssl_protocols: 'modern'
-kibana_ngx_version: 'extras'
 kibana_ngx_site_path: '/data/nginx_site'
 kibana_ngx_logs_path: '/data/nginx_logs'
 kibana_elastic_https: true
@@ -165,9 +162,10 @@ kibana_elastic_heap_size: '3g'
 kibana_elastic_memory_lock: false
 kibana_plugins:
   - 'http://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_{{ kibana_version }}.zip'
-environments: 'Development'
+environments: 'prd'
 datacenter: 'dc01'
 domain: 'local'
+customer: 'demo'
 tags:
   subscription: 'default'
   owner: 'nobody'
