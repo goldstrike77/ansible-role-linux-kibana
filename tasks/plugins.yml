@@ -12,6 +12,6 @@
   until: kibana_plugin is succeeded
   retries: 5
   delay: 2
-  loop: '{{ kibana_plugins }}'
+  loop: '{{ kibana_plugins | default({}) | dict2items }}'
   changed_when: false
   failed_when: false

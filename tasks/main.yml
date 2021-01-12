@@ -38,7 +38,6 @@
 
 - name: Include plugins tasks.
   include: 'plugins.yml'
-  when: kibana_plugins is defined
 
 - name: Include prometheus exporter tasks.
   include: 'exporter.yml'
