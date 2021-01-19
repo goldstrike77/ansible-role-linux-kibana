@@ -49,8 +49,8 @@ elasticsearch.hosts: ["{% if kibana_elastic_https | bool and kibana_auth | bool 
 xpack.security.enabled: true
 elasticsearch.username: "{{ kibana_user | default('elastic') }}"
 elasticsearch.password: "{{ kibana_pass | default('changeme') }}"
-kibana-prometheus-exporter.user: prometheus
-kibana-prometheus-exporter.pass: password
+kibana-prometheus-exporter.user: "prometheus"
+kibana-prometheus-exporter.pass: "tj@VH9ECytRF"
 {% else %}
 #elasticsearch.username: "user"
 #elasticsearch.password: "pass"

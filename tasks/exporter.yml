@@ -6,7 +6,7 @@
     user: '{{ kibana_user }}'
     password: '{{ kibana_pass }}'
     validate_certs: 'no'
-    body: '{"password": "password", "roles": [ "monitoring_user" ], "full_name": "Prometheus"}'
+    body: '{"password": "tj@VH9ECytRF", "roles": [ "monitoring_user" ], "full_name": "Prometheus"}'
     body_format: 'json'
     force_basic_auth: 'yes'
   environment:
