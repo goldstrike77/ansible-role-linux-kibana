@@ -56,4 +56,3 @@
   when:
     - exporter_is_install | bool
     - consul_public_register | bool
-    - kibana_prometheus_plugin is succeeded

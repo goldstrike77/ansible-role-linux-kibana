@@ -1,39 +1,35 @@
 ---
-- name: Create Prometheus export user.
-  uri:
-    url: '{% if kibana_elastic_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}://{{ kibana_servers[0] }}:{{ kibana_elastic_port }}/_xpack/security/user/prometheus'
-    method: 'POST'
-    user: '{{ kibana_user }}'
-    password: '{{ kibana_pass }}'
-    validate_certs: 'no'
-    body: '{"password": "tj@VH9ECytRF", "roles": [ "monitoring_user" ], "full_name": "Prometheus"}'
-    body_format: 'json'
-    force_basic_auth: 'yes'
-  environment:
-    no_proxy: '{{ kibana_servers[0] }}'
-  when:
-    - kibana_auth | bool
-    - kibana_servers[0] in ansible_default_ipv4.address
-  register: kibana_prometheus_user_add_status
-  until: kibana_prometheus_user_add_status.status == 200
-  retries: 3
-  delay: 2
-  changed_when: false
-  failed_when: false
-  no_log: true
+- name: Kibana exporter program binary transfer.
+  unarchive:
+    src: 'kibana_exporter.tar.xz'
+    dest: '/usr/local/bin'
+    owner: 'kibana'
+    group: 'kibana'
+    mode: '0755'
+  register: kibana_exporter_update
 
-- name: Install kibana prometheus plugins.
-  shell: >-
-    NODE_OPTIONS="--no-warnings --max-old-space-size=4096" /usr/share/kibana/bin/kibana-plugin install
-    'http://github.com/pjhampton/kibana-prometheus-exporter/releases/download/{{ kibana_version }}/kibanaPrometheusExporter-{{ kibana_version }}.zip'
-  args:
-    executable: '/bin/bash'
-    chdir: '/usr/share/kibana'
-  become: 'yes'
-  become_user: 'kibana'
-  register: kibana_prometheus_plugin
-  until: kibana_prometheus_plugin is succeeded
-  retries: 5
-  delay: 2
-  changed_when: false
-  failed_when: false
+- name: Kibana exporter configure file transfer.
+  template:
+    src: 'kibana_exporter.default.j2'
+    dest: '/etc/default/kibana_exporter'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  register: kibana_exporter_config
+
+- name: Kibana service file transfer.
+  copy:
+    src: 'kibana_exporter.service'
+    dest: '/lib/systemd/system'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  register: kibana_systemd_update
+
+- name: Reloading the Kibana exporter service.
+  systemd:
+    name: 'kibana_exporter.service'
+    enabled: 'yes'
+    state: 'restarted'
+    daemon_reload: 'yes'
+  when: kibana_exporter_update is changed or kibana_exporter_config is changed or kibana_systemd_update is changed

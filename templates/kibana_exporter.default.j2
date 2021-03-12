@@ -1,0 +1,1 @@
+KIBANA_EXPORTER_OPTS='-kibana.uri {% if kibana_https | bool and kibana_auth | bool %}https{% else %}http{% endif %}://{{ ansible_default_ipv4.address }}:{{ kibana_port_server }}{% if kibana_proxy | bool %}/kibana{% endif %} -web.listen-address {{ ansible_default_ipv4.address }}:{{ kibana_port_exporter }} -kibana.skip-tls'

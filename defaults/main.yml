@@ -14,6 +14,7 @@ kibana_ngx_dept: false # A boolean value, whether proxy web interface and API tr
 
 # Listen port #
 kibana_port_server: '5601' # Kibana server port.
+kibana_port_exporter: '9684' # Prometheus exporter port.
 
 # Elasticsearch parameters #
 kibana_elastic_host: '{{ ansible_default_ipv4.address }}' # Elasticsearch instances.
