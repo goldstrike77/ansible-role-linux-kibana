@@ -12,7 +12,12 @@
 - name: Increased the Kibana heap size.
   lineinfile:
     state: 'present'
-    dest: '/etc/default/kibana'
+    dest: '{{ item }}'
     regexp: '^NODE_OPTIONS'
     line: 'NODE_OPTIONS="--max-old-space-size=4096"'
+  loop:
+    - '/etc/sysconfig/kibana'
+    - '/etc/default/kibana'
   register: kibana_heap
+  changed_when: false
+  failed_when: false
