@@ -25,6 +25,7 @@ __Table of Contents__
 - [License](#license)
 - [Author Information](#author-information)
 - [Contributors](#Contributors)
+- [Donations](#Donations)
 
 ## Overview
 Kibana is the 'K' in the ELK Stack, the world’s most popular open-source log analysis platform, and provides users with a tool for exploring, visualizing, and building dashboards on top of the log data stored in Elasticsearch clusters. Kibana’s core feature is data querying and analysis. Using various methods, users can search the data indexed in Elasticsearch for specific events or strings within their data for root cause analysis and diagnostics. Based on these queries, users can use Kibana’s visualization features which allow users to visualize data in a variety of different ways, using charts, tables, geographical maps and other types of visualizations.
@@ -126,14 +127,14 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: all
   roles:
      - role: ansible-role-linux-kibana
-       kibana_version: '7.9.3'
+       kibana_version: '7.10.2'
 ```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-kibana_version: '7.9.3'
+kibana_version: '7.10.2'
 kibana_proxy: false
 kibana_auth: true
 kibana_user: 'elastic'
@@ -189,3 +190,8 @@ Please send your suggestions to make this role better.
 
 ## Contributors
 Special thanks to the [Connext Information Technology](http://www.connext.com.cn) for their contributions to this role.
+
+## Donations
+Please donate to the following monero address.
+
+    46CHVMbb6wQV2PJYEbahb353SYGqXhcdFQVEWdCnHb6JaR5125h3kNQ6bcqLye5G7UF7qz6xL9qHLDSAY3baagfmLZABz75
