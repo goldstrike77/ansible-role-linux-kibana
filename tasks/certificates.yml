@@ -1,9 +1,10 @@
 ---
 - name: Install requirement python package.
   pip:
-    name: '{{ kibana_python_dependent_packages }}'
+    name: '{{ item }}'
     state: 'forcereinstall'
-    extra_args: '--default-timeout=120 -i https://{{ kibana_pypi_url }}/simple --trusted-host {{ kibana_pypi_url }}'
+    extra_args: '--default-timeout=120 --ignore-installed -i https://{{ kibana_pypi_url }}/simple --trusted-host {{ kibana_pypi_url }}'
+  loop: '{{ kibana_python_dependent_packages }}'
   register: kibana_python_status
   until: kibana_python_status is succeeded
   retries: 5
