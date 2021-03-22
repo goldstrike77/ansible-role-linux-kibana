@@ -1,15 +1,4 @@
 ---
-- name: Install requirement python package.
-  pip:
-    name: '{{ item }}'
-    state: 'forcereinstall'
-    extra_args: '--default-timeout=120 --ignore-installed -i https://{{ kibana_pypi_url }}/simple --trusted-host {{ kibana_pypi_url }}'
-  loop: '{{ kibana_python_dependent_packages }}'
-  register: kibana_python_status
-  until: kibana_python_status is succeeded
-  retries: 5
-  delay: 2
-
 - name: Check private key exists.
   stat:
     path: '{{ kibana_cert_path }}/server.key'
@@ -17,6 +6,16 @@
 
 - name: Certificate Signing operation.
   block:
+    - name: Install requirement python package.
+      pip:
+        name: '{{ item }}'
+        state: 'forcereinstall'
+        extra_args: '--default-timeout=120 --ignore-installed -i https://{{ kibana_pypi_url }}/simple --trusted-host {{ kibana_pypi_url }}'
+      loop: '{{ kibana_python_dependent_packages }}'
+      register: kibana_python_status
+      until: kibana_python_status is succeeded
+      retries: 5
+      delay: 2
     - name: Creating Certificate folder.
       file:
         dest: '{{ kibana_cert_path }}'
