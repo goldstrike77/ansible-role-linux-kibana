@@ -1,5 +1,5 @@
 ---
-- name: Enable Kibana service
+- name: Ensure Kibana service is enabled.
   systemd:
     name: 'kibana.service'
     enabled: 'yes'
@@ -7,4 +7,10 @@
     daemon_reload: 'yes'
   async: 1
   poll: 0
-  listen: Ensure Kibana service is enabled
+
+- name: Ensure Kibana exporter service is enabled.
+  systemd:
+    name: 'kibana_exporter.service'
+    enabled: 'yes'
+    state: 'restarted'
+    daemon_reload: 'yes'

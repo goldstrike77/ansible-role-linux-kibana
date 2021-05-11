@@ -21,5 +21,6 @@
     disable_gpg_check: 'yes'
   register: kibana_update
   until: kibana_update is succeeded
+  notify: 'Ensure Kibana service is enabled.'
   retries: 5
   delay: 2

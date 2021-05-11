@@ -51,15 +51,15 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### General parameters
 * `kibana_version`: Specify the Kibana version.
-* `kibana_auth`: A boolean value, Enable or Disable authentication.
+* `kibana_auth`: A boolean to determine whether or not enable authentication.
 * `kibana_user`: Authorization user name, do not modify it.
 * `kibana_pass`: Authorization user password.
-* `kibana_https`: A boolean value, whether Encrypting HTTP client communications.
-* `kibana_proxy`: Whether running behind a proxy.
+* `kibana_https`: A boolean to determine whether or not Encrypting HTTP client communications.
+* `kibana_proxy`: A boolean to determine whether or not running behind a proxy.
 
 ##### Role dependencies
-* `kibana_elastic_dept`: A boolean value, whether ElasticSearch use the same environment.
-* `kibana_ngx_dept`: A boolean value, whether proxy web interface and API traffic using NGinx.
+* `kibana_elastic_dept`: A boolean to determine whether or not use ElasticSearch at the same environment.
+* `kibana_ngx_dept`: A boolean to determine whether or not proxy web interface and API traffic using NGinx.
 
 ##### Listen port
 * `kibana_port_server`: Kibana server port.

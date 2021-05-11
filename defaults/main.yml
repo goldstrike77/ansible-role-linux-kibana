@@ -1,16 +1,16 @@
 ---
 # General parameters #
-kibana_is_install: false # A boolean value, whether install the Kibana.
+kibana_is_install: false # A boolean to determine whether or not to install the Kibana.
 kibana_version: '7.11.2' # Specify the Kibana version.
-kibana_auth: true # A boolean value, Enable or Disable authentication.
+kibana_auth: true # A boolean to determine whether or not enable authentication.
 kibana_user: 'elastic' # Authorization user name, do not modify it.
 kibana_pass: 'changeme' # Authorization user password.
-kibana_https: true # A boolean value, whether Encrypting HTTP client communications.
-kibana_proxy: false # Whether running behind a proxy.
+kibana_https: true # A boolean to determine whether or not Encrypting HTTP client communications.
+kibana_proxy: false # A boolean to determine whether or not running behind a proxy.
 
 # Role dependencies #
-kibana_elastic_dept: false # A boolean value, whether ElasticSearch use the same environment.
-kibana_ngx_dept: false # A boolean value, whether proxy web interface and API traffic using NGinx.
+kibana_elastic_dept: false # A boolean to determine whether or not use ElasticSearch at the same environment.
+kibana_ngx_dept: false # A boolean to determine whether or not proxy web interface and API traffic using NGinx.
 
 # Listen port #
 kibana_port_server: '5601' # Kibana server port.

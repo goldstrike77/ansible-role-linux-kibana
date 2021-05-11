@@ -6,7 +6,7 @@
     owner: 'kibana'
     group: 'kibana'
     mode: '0755'
-  register: kibana_exporter_update
+  notify: 'Ensure Kibana exporter service is enabled.'
 
 - name: Kibana exporter configure file transfer.
   template:
@@ -15,7 +15,7 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
-  register: kibana_exporter_config
+  notify: 'Ensure Kibana exporter service is enabled.'
 
 - name: Kibana service file transfer.
   copy:
@@ -24,12 +24,4 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
-  register: kibana_systemd_update
-
-- name: Reloading the Kibana exporter service.
-  systemd:
-    name: 'kibana_exporter.service'
-    enabled: 'yes'
-    state: 'restarted'
-    daemon_reload: 'yes'
-  when: kibana_exporter_update is changed or kibana_exporter_config is changed or kibana_systemd_update is changed
+  notify: 'Ensure Kibana exporter service is enabled.'

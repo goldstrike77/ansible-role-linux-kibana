@@ -10,6 +10,7 @@
   become_user: 'kibana'
   register: kibana_plugin
   until: kibana_plugin is succeeded
+  notify: 'Ensure Kibana service is enabled.'
   retries: 5
   delay: 2
   loop: '{{ kibana_plugins | default({}) | list }}'
