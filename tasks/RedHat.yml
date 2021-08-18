@@ -9,6 +9,7 @@
     file: '{{ kibana_repo_name }}'
     baseurl: '{{ kibana_repo_url }}'
     gpgcheck: 'no'
+    sslverify: 'no'
     timeout: '60'
 
 - name: Install the Kibana packages.
